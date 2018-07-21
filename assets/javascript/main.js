@@ -27,12 +27,16 @@ $(document).ready(function(){
       $("#button-input").on("click", function(event){
           event.preventDefault();
 
+          $("#empty-form").hide();
           trainName = $("#train-name").val().trim();
           destination = $("#train-destination").val().trim();
           trainTime = $("#train-time").val().trim();
           frequency = $("#time-freq").val().trim();
 
-    // code for push
+    
+          if (trainName !="" && destination !="" && trainTime !="" && frequency !="") {
+
+          // code for push
     dataRef.ref().push({
 
         trainName: trainName,
@@ -42,17 +46,26 @@ $(document).ready(function(){
         dateAdded: firebase.database.ServerValue.TIMESTAMP
         
     });
+    $("#train-form")[0].reset();
+        } else {
+            $("#empty-form").show();
 
+
+          }
       });
 
     // firebase watcher + initial loader
     dataRef.ref().on("child_added", function(childSnapshot){
+        console.log("************************************************")
     // log what is coming from snapshot    
         console.log(childSnapshot.val().trainName);
         console.log(childSnapshot.val().destination);
         console.log(childSnapshot.val().trainTime);
         console.log(childSnapshot.val().frequency);
         
+
+        var barTest = childSnapshot.val().trainName;
+     
         var newRow = $("<tr>");
         var newName = $("<td>").attr("data-name", childName).text(childName);
         var newDestinaton = $("<td>").attr("data-name", childDestination).text(childDestination);

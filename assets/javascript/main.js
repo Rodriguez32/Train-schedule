@@ -1,3 +1,10 @@
+// Was able to get Firebase to log approprietly. Was not able to get my information to post on my page. 
+// With updated info on trains and arrivals etc. 
+// Page blinks when I submit. 
+// I see my calls work when I console.log with stars. 
+
+
+
 $(document).ready(function(){
     console.log("Hello World");
 
